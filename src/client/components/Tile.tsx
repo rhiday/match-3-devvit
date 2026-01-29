@@ -11,24 +11,29 @@ interface TileProps {
 
 // Tile theme sets based on difficulty/score
 const TILE_THEMES = {
-    // Beginner themes (0-599 score) - friendly, colorful
+    // Beginner themes (0-799 score) - friendly, colorful
     beginner: ['candy', 'crystal', 'emerald', 'gem', 'gold', 'wood'],
-    // Advanced themes (600+ score) - challenging, intense
-    advanced: ['metal', 'volcano', 'cheese', 'goo'],
+    // Advanced themes (800+ score) - challenging, intense
+    // Map each color explicitly to avoid confusion
+    advanced: {
+        red: 'metal',
+        blue: 'volcano',
+        green: 'cheese',
+        yellow: 'goo',
+        purple: 'gem', // Keep gem for purple to stay distinct
+    },
 };
 
 // Map colors to their themed tile images
 function getTileImage(color: TileColor, score: number): string {
-    const colorIndex = ['red', 'blue', 'green', 'yellow', 'purple'].indexOf(color);
-    
     // Determine theme based on score
-    if (score >= 600) {
-        // Advanced level - use advanced themes
-        const themeIndex = colorIndex % TILE_THEMES.advanced.length;
-        const theme = TILE_THEMES.advanced[themeIndex];
+    if (score >= 800) {
+        // Advanced level - use explicit color mapping
+        const theme = TILE_THEMES.advanced[color];
         return `tiles/${theme}.png`;
     } else {
-        // Beginner level - use beginner themes
+        // Beginner level - rotate through beginner themes
+        const colorIndex = ['red', 'blue', 'green', 'yellow', 'purple'].indexOf(color);
         const themeIndex = colorIndex % TILE_THEMES.beginner.length;
         const theme = TILE_THEMES.beginner[themeIndex];
         return `tiles/${theme}.png`;
