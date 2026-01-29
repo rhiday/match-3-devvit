@@ -233,52 +233,22 @@ Can you beat my score? 🎮`.trim();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 p-4">
-      <div className="container mx-auto max-w-6xl">
-        {/* Header */}
-        <div className="mb-6 text-center relative">
-          <div className="flex items-center justify-center gap-4 mb-2">
-            <h1 className="text-5xl font-bold text-white">
-              SnapMatch
-            </h1>
-            <button
-              onClick={() => setShowHowToPlay(true)}
-              className="text-2xl text-gray-400 hover:text-white transition-colors"
-              title="How to play"
-            >
-              ❓
-            </button>
-            <VolumeControl />
+      <div className="container mx-auto max-w-7xl">
+        {/* Top bar - Score, Chain, and Timer */}
+        <div className="mb-4 flex items-center justify-between gap-2 sm:gap-4 flex-wrap">
+          {/* Left: Score + Chain */}
+          <div className="flex items-center gap-2">
+            <ScoreDisplay score={gameState.score} totalChains={gameState.totalChains} />
           </div>
-          <p className="text-gray-400">
-            Match 3+ tiles to score points. Create chains for multipliers!
-          </p>
-          <div className="mt-2 text-sm">
-            <button
-              onClick={() => navigateTo('https://github.com/yourusername/snapmatch/issues')}
-              className="text-gray-500 hover:text-gray-300 transition-colors cursor-pointer"
-            >
-              🐛 Report Issue
-            </button>
-            <span className="text-gray-700 mx-2">|</span>
-            <button
-              onClick={() => navigateTo('https://www.reddit.com/r/SnapMatch')}
-              className="text-gray-500 hover:text-gray-300 transition-colors cursor-pointer"
-            >
-              💬 r/SnapMatch
-            </button>
-          </div>
+
+          {/* Right: Timer */}
+          <Timer timeRemaining={gameState.timeRemaining} />
         </div>
 
         {/* Game area */}
-        <div className="grid gap-8 lg:grid-cols-3">
-          {/* Left sidebar - Score & Timer */}
-          <div className="flex flex-col gap-6 lg:order-1">
-            <ScoreDisplay score={gameState.score} totalChains={gameState.totalChains} />
-            <Timer timeRemaining={gameState.timeRemaining} />
-          </div>
-
-          {/* Center - Game board */}
-          <div className="lg:order-2 relative">
+        <div className="grid gap-6 lg:grid-cols-[1fr_auto]">
+          {/* Main - Game board */}
+          <div className="relative">
             <GameBoard
               board={gameState.board}
               onTileClick={handleTileClick}
@@ -289,19 +259,19 @@ Can you beat my score? 🎮`.trim();
             
             {/* Start game overlay */}
             {!gameState.gameStarted && !gameState.gameOver && (
-              <div className="absolute inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm rounded-3xl">
+              <div className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm rounded-3xl">
                 <button
                   onClick={handleStartGame}
-                  className="px-8 py-4 text-2xl font-bold text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-2xl shadow-2xl hover:from-orange-600 hover:to-orange-700 active:scale-95 transition-all"
+                  className="px-10 py-5 text-3xl font-black text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-2xl shadow-2xl hover:from-orange-600 hover:to-orange-700 active:scale-95 hover:scale-105 transition-all animate-pulse hover:animate-none"
                 >
-                  Tap to Start
+                  🎮 Tap to Start
                 </button>
               </div>
             )}
           </div>
 
           {/* Right sidebar - Leaderboard */}
-          <div className="lg:order-3">
+          <div className="lg:w-80">
             {showLeaderboard ? (
               <Leaderboard
                 entries={leaderboard}
@@ -309,13 +279,39 @@ Can you beat my score? 🎮`.trim();
                 loading={false}
               />
             ) : (
-              <div className="rounded-2xl border border-gray-700 bg-gray-800/50 p-6 backdrop-blur-sm">
-                <p className="text-center text-gray-400">
-                  Leaderboard will appear after game ends
+              <div className="rounded-2xl border border-gray-700 bg-gray-800/50 p-6 backdrop-blur-sm h-full flex items-center justify-center">
+                <p className="text-center text-gray-400 font-medium">
+                  🏆 Leaderboard appears after game ends
                 </p>
               </div>
             )}
           </div>
+        </div>
+
+        {/* Bottom controls - Help, Volume, and Links */}
+        <div className="mt-6 flex items-center justify-center gap-4 flex-wrap">
+          <button
+            onClick={() => setShowHowToPlay(true)}
+            className="text-3xl text-gray-400 hover:text-white transition-all hover:scale-110 active:scale-95"
+            title="How to play"
+          >
+            ❓
+          </button>
+          <VolumeControl />
+          <span className="text-gray-700">|</span>
+          <button
+            onClick={() => navigateTo('https://github.com/yourusername/snapmatch/issues')}
+            className="text-gray-500 hover:text-orange-400 transition-colors cursor-pointer font-medium"
+          >
+            🐛 Report
+          </button>
+          <span className="text-gray-700">|</span>
+          <button
+            onClick={() => navigateTo('https://www.reddit.com/r/SnapMatch')}
+            className="text-gray-500 hover:text-orange-400 transition-colors cursor-pointer font-medium"
+          >
+            💬 Community
+          </button>
         </div>
 
         {/* Results modal */}

@@ -13,24 +13,27 @@ export function Timer({ timeRemaining }: TimerProps) {
     };
 
     return (
-        <div className="flex flex-col items-center gap-2">
+        <div className="flex items-center gap-2 flex-shrink-0">
             {/* Digital timer display */}
             <div className={`
-        relative rounded-2xl bg-gradient-to-br px-6 py-3
+        relative rounded-2xl bg-gradient-to-br px-4 sm:px-5 py-2
         ${getColor()}
         shadow-xl
         ${timeRemaining <= 10 ? 'animate-pulse' : ''}
       `}>
                 <div className="absolute inset-0 rounded-2xl bg-white/10" />
-                <span className="relative text-4xl font-bold text-white tabular-nums">
-                    {Math.ceil(timeRemaining)}s
-                </span>
+                <div className="relative flex items-baseline gap-1.5">
+                    <span className="text-xs font-bold uppercase text-white/80">⏱</span>
+                    <span className="text-2xl sm:text-3xl font-black text-white tabular-nums">
+                        {Math.ceil(timeRemaining)}s
+                    </span>
+                </div>
             </div>
 
-            {/* Progress bar */}
-            <div className="h-2 w-32 overflow-hidden rounded-full bg-gray-800">
+            {/* Progress bar - hidden on small screens */}
+            <div className="hidden sm:block h-3 w-20 overflow-hidden rounded-full bg-gray-800 shadow-inner">
                 <div
-                    className={`h-full bg-gradient-to-r ${getColor()} transition-all duration-1000 ease-linear`}
+                    className={`h-full bg-gradient-to-r ${getColor()} transition-all duration-1000 ease-linear shadow-lg`}
                     style={{ width: `${percentage}%` }}
                 />
             </div>
