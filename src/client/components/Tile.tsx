@@ -11,9 +11,9 @@ interface TileProps {
 
 // Tile theme sets based on difficulty/score
 const TILE_THEMES = {
-    // Beginner themes (0-1000 score) - friendly, colorful
+    // Beginner themes (0-599 score) - friendly, colorful
     beginner: ['candy', 'crystal', 'emerald', 'gem', 'gold', 'wood'],
-    // Advanced themes (1000+ score) - challenging, intense
+    // Advanced themes (600+ score) - challenging, intense
     advanced: ['metal', 'volcano', 'cheese', 'goo'],
 };
 
@@ -22,7 +22,7 @@ function getTileImage(color: TileColor, score: number): string {
     const colorIndex = ['red', 'blue', 'green', 'yellow', 'purple'].indexOf(color);
     
     // Determine theme based on score
-    if (score >= 1000) {
+    if (score >= 600) {
         // Advanced level - use advanced themes
         const themeIndex = colorIndex % TILE_THEMES.advanced.length;
         const theme = TILE_THEMES.advanced[themeIndex];
