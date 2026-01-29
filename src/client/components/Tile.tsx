@@ -23,11 +23,55 @@ const generateSVG = (color1: string, color2: string) => {
     return `data:image/svg+xml;base64,${btoa(svg)}`;
 };
 
+// Custom yellow tile SVG
+const yellowTileSVG = `<svg width="800" height="800" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_122_72)">
+<rect width="800" height="800" rx="120" fill="url(#paint0_linear_122_72)"/>
+<g filter="url(#filter0_i_122_72)">
+<rect x="80" y="80" width="640" height="640" rx="80" fill="white" fill-opacity="0.2"/>
+</g>
+<g filter="url(#filter1_f_122_72)">
+<ellipse cx="270" cy="270" rx="150" ry="150" fill="white" fill-opacity="0.4"/>
+</g>
+<g style="mix-blend-mode:overlay" opacity="0.2">
+<circle cx="400" cy="400" r="400" fill="url(#paint1_radial_122_72)"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_i_122_72" x="80" y="80" width="640" height="648" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="8"/>
+<feGaussianBlur stdDeviation="4"/>
+<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+<feBlend mode="normal" in2="shape" result="effect1_innerShadow_122_72"/>
+</filter>
+<filter id="filter1_f_122_72" x="40" y="40" width="460" height="460" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="40" result="effect1_foregroundBlur_122_72"/>
+</filter>
+<linearGradient id="paint0_linear_122_72" x1="400" y1="0" x2="400" y2="800" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FCD34D"/>
+<stop offset="1" stop-color="#F59E0B"/>
+</linearGradient>
+<radialGradient id="paint1_radial_122_72" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(400 400) rotate(90) scale(400)">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+<clipPath id="clip0_122_72">
+<rect width="800" height="800" rx="120" fill="white"/>
+</clipPath>
+</defs>
+</svg>`;
+
 const TILE_IMAGES: Record<TileColor, string> = {
     red: generateSVG('#ef4444', '#b91c1c'),
     blue: generateSVG('#3b82f6', '#1d4ed8'),
     green: generateSVG('#22c55e', '#15803d'),
-    yellow: generateSVG('#facc15', '#ca8a04'),
+    yellow: `data:image/svg+xml;base64,${btoa(yellowTileSVG)}`,
     purple: generateSVG('#a855f7', '#7e22ce'),
 };
 
