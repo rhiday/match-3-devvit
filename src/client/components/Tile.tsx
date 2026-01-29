@@ -31,11 +31,21 @@ export function Tile({ color, onClick, isSelected, isMatched, isShaking }: TileP
     };
 
     return (
-        <button
+        <div
             onClick={onClick}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onClick();
+                }
+            }}
             style={{
                 backgroundColor: solidColors[color],
                 background: `linear-gradient(135deg, ${TILE_COLORS[color].from} 0%, ${TILE_COLORS[color].to} 100%)`,
+                cursor: 'pointer',
+                WebkitTapHighlightColor: 'transparent',
             }}
             className={`
         relative h-full w-full rounded-xl
@@ -77,6 +87,6 @@ export function Tile({ color, onClick, isSelected, isMatched, isShaking }: TileP
                     })}
                 </>
             )}
-        </button>
+        </div>
     );
 }
