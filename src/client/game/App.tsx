@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { navigateTo } from '@devvit/web/client';
 
 import type { GameState, LeaderboardEntry } from '../../shared/types';
-import { initializeGame, makeMove, processCascade, updateTime, startGame } from '../../shared/game/GameState';
+import { initializeGame, makeMove, processCascade, updateTime, startGame, checkAndFixDeadlock } from '../../shared/game/GameState';
 import { GameBoard } from '../components/GameBoard';
 import { Timer } from '../components/Timer';
 import { ScoreDisplay } from '../components/ScoreDisplay';
@@ -31,6 +31,7 @@ export function App() {
   const [showHowToPlay, setShowHowToPlay] = useState(false);
   const [comboPoints, setComboPoints] = useState(0);
   const [comboChain, setComboChain] = useState(0);
+  const [showShuffleNotification, setShowShuffleNotification] = useState(false);
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const cascadeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -99,9 +100,20 @@ export function App() {
         }, 150);
       }, 500); // Match explosion animation duration
     } else {
-      // Done cascading
+      // Done cascading - check for deadlock
+      const { board: checkedBoard, wasShuffled } = checkAndFixDeadlock(result.newState.board);
+      
+      if (wasShuffled) {
+        // Show shuffle notification
+        setShowShuffleNotification(true);
+        setTimeout(() => setShowShuffleNotification(false), 3000);
+      }
+      
       setMatchedTiles(new Set());
-      setGameState(result.newState);
+      setGameState({
+        ...result.newState,
+        board: checkedBoard,
+      });
       setIsCascading(false);
       // Reset combo display after a delay
       setTimeout(() => {
@@ -316,7 +328,7 @@ Can you beat my score? 🎮`.trim();
             </button>
           </div>
           <div className="flex items-center gap-2">
-            <div className="text-xs text-gray-600 font-mono">v0.3.2 fix-mapping-800</div>
+            <div className="text-xs text-gray-600 font-mono">v0.4.0 auto-shuffle</div>
             {/* Debug gradient test */}
             <div 
               style={{ background: 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)' }}
@@ -356,6 +368,21 @@ Can you beat my score? 🎮`.trim();
 
         {/* Combo feedback */}
         <ComboFeedback points={comboPoints} chainDepth={comboChain} />
+        
+        {/* Shuffle notification */}
+        {showShuffleNotification && (
+          <div className="fixed top-24 left-1/2 -translate-x-1/2 z-50 animate-bounce-in">
+            <div className="px-6 py-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl shadow-2xl border-2 border-white/20">
+              <div className="flex items-center gap-3">
+                <span className="text-3xl">🔀</span>
+                <div>
+                  <div className="text-xl font-black text-white">Board Shuffled!</div>
+                  <div className="text-sm text-white/80">No moves were available</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

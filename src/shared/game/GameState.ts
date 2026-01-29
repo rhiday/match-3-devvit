@@ -177,6 +177,96 @@ export function updateTime(state: GameState, deltaSeconds: number): GameState {
 }
 
 /**
+ * Check if there are any valid moves available on the board
+ */
+export function hasValidMoves(board: Board): boolean {
+    const size = board.tiles.length;
+    
+    // Check all possible swaps
+    for (let row = 0; row < size; row++) {
+        for (let col = 0; col < size; col++) {
+            // Try swapping with right neighbor
+            if (col < size - 1) {
+                if (isValidMove(board, { row, col }, { row, col: col + 1 })) {
+                    return true;
+                }
+            }
+            // Try swapping with bottom neighbor
+            if (row < size - 1) {
+                if (isValidMove(board, { row, col }, { row: row + 1, col })) {
+                    return true;
+                }
+            }
+        }
+    }
+    
+    return false;
+}
+
+/**
+ * Shuffle the board to create new possibilities
+ * Uses Fisher-Yates shuffle algorithm
+ */
+export function shuffleBoard(board: Board): Board {
+    const newTiles = board.tiles.map((row) => [...row]);
+    
+    // Collect all tiles
+    const allTiles: typeof newTiles[0] = [];
+    for (let row = 0; row < newTiles.length; row++) {
+        for (let col = 0; col < newTiles[row].length; col++) {
+            if (newTiles[row][col].color) {
+                allTiles.push(newTiles[row][col]);
+            }
+        }
+    }
+    
+    // Fisher-Yates shuffle
+    for (let i = allTiles.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [allTiles[i], allTiles[j]] = [allTiles[j], allTiles[i]];
+    }
+    
+    // Redistribute tiles back to board
+    let tileIndex = 0;
+    for (let row = 0; row < newTiles.length; row++) {
+        for (let col = 0; col < newTiles[row].length; col++) {
+            if (allTiles[tileIndex]) {
+                newTiles[row][col] = {
+                    ...allTiles[tileIndex],
+                    row,
+                    col,
+                };
+                tileIndex++;
+            }
+        }
+    }
+    
+    return { ...board, tiles: newTiles };
+}
+
+/**
+ * Check for deadlock and shuffle if needed
+ * Returns shuffled board if no moves available, otherwise returns original
+ */
+export function checkAndFixDeadlock(board: Board): { board: Board; wasShuffled: boolean } {
+    if (!hasValidMoves(board)) {
+        // Keep shuffling until we have valid moves
+        let shuffledBoard = shuffleBoard(board);
+        let attempts = 0;
+        const MAX_SHUFFLE_ATTEMPTS = 10;
+        
+        while (!hasValidMoves(shuffledBoard) && attempts < MAX_SHUFFLE_ATTEMPTS) {
+            shuffledBoard = shuffleBoard(shuffledBoard);
+            attempts++;
+        }
+        
+        return { board: shuffledBoard, wasShuffled: true };
+    }
+    
+    return { board, wasShuffled: false };
+}
+
+/**
  * Make a move (swap tiles and process resulting cascades)
  * Returns updated state or null if move is invalid
  */
