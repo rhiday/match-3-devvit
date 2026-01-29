@@ -64,6 +64,11 @@ export function Tile({ color, onClick, isSelected, isMatched, isShaking }: TileP
             {/* Highlight shine */}
             <div className="absolute left-2 top-2 size-3 rounded-full bg-white/30" />
 
+            {/* DEBUG: Show color name */}
+            <div className="absolute inset-0 flex items-center justify-center text-white text-[8px] font-bold pointer-events-none">
+                {color[0].toUpperCase()}
+            </div>
+
             {/* Explosion particles */}
             {isMatched && (
                 <>
