@@ -8,27 +8,33 @@ interface TileProps {
     isShaking?: boolean;
 }
 
-const TILE_COLORS: Record<TileColor, { from: string; to: string }> = {
-    red: { from: '#ef4444', to: '#b91c1c' },
-    blue: { from: '#3b82f6', to: '#1d4ed8' },
-    green: { from: '#22c55e', to: '#15803d' },
-    yellow: { from: '#facc15', to: '#ca8a04' },
-    purple: { from: '#a855f7', to: '#7e22ce' },
+// Generate SVG data URLs for each color
+const generateSVG = (color1: string, color2: string) => {
+    const svg = `<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:${color1};stop-opacity:1" />
+                <stop offset="100%" style="stop-color:${color2};stop-opacity:1" />
+            </linearGradient>
+        </defs>
+        <rect width="100" height="100" fill="url(#grad)" rx="12"/>
+        <ellipse cx="25" cy="25" rx="8" ry="8" fill="white" opacity="0.3"/>
+    </svg>`;
+    return `data:image/svg+xml;base64,${btoa(svg)}`;
+};
+
+const TILE_IMAGES: Record<TileColor, string> = {
+    red: generateSVG('#ef4444', '#b91c1c'),
+    blue: generateSVG('#3b82f6', '#1d4ed8'),
+    green: generateSVG('#22c55e', '#15803d'),
+    yellow: generateSVG('#facc15', '#ca8a04'),
+    purple: generateSVG('#a855f7', '#7e22ce'),
 };
 
 export function Tile({ color, onClick, isSelected, isMatched, isShaking }: TileProps) {
     if (!color) {
-        return <div className="h-full w-full bg-gray-700 rounded-xl" />;
+        return <div style={{ width: '100%', height: '100%', background: '#374151', borderRadius: '12px' }} />;
     }
-
-    // Solid colors as fallback for mobile
-    const solidColors: Record<TileColor, string> = {
-        red: '#ef4444',
-        blue: '#3b82f6',
-        green: '#22c55e',
-        yellow: '#facc15',
-        purple: '#a855f7',
-    };
 
     return (
         <div
@@ -42,32 +48,33 @@ export function Tile({ color, onClick, isSelected, isMatched, isShaking }: TileP
                 }
             }}
             style={{
-                // Pure inline styles - no Tailwind classes
                 position: 'relative',
                 width: '100%',
                 height: '100%',
-                borderRadius: '12px',
-                background: solidColors[color],
                 cursor: 'pointer',
                 transform: isSelected ? 'scale(1.1)' : 'scale(1)',
                 opacity: isMatched ? 0 : 1,
                 transition: 'all 0.3s ease-out',
-                boxShadow: isSelected ? '0 0 0 4px white, 0 20px 25px -5px rgba(0, 0, 0, 0.3)' : '0 10px 15px -3px rgba(0, 0, 0, 0.2)',
+                filter: isSelected ? 'drop-shadow(0 0 8px white)' : 'none',
                 WebkitTapHighlightColor: 'transparent',
             }}
             className={isShaking ? 'shake-animation' : ''}
             aria-label={`${color} tile`}
         >
+            <img 
+                src={TILE_IMAGES[color]}
+                alt={color}
+                style={{
+                    width: '100%',
+                    height: '100%',
+                    display: 'block',
+                    pointerEvents: 'none',
+                    userSelect: 'none',
+                }}
+                draggable={false}
+            />
             {/* Inner glow effect - removed for better mobile visibility */}
             {/* <div className="absolute inset-2 rounded-lg bg-white/20" /> */}
-
-            {/* Highlight shine */}
-            <div className="absolute left-2 top-2 size-3 rounded-full bg-white/30" />
-
-            {/* DEBUG: Remove after confirming colors work */}
-            {/* <div className="absolute inset-0 flex items-center justify-center text-white text-[8px] font-bold pointer-events-none">
-                {color[0].toUpperCase()}
-            </div> */}
 
             {/* Explosion particles */}
             {isMatched && (
