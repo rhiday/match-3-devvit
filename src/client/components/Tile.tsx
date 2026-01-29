@@ -8,12 +8,12 @@ interface TileProps {
     isShaking?: boolean;
 }
 
-const TILE_COLORS: Record<TileColor, string> = {
-    red: 'bg-gradient-to-br from-red-500 to-red-700',
-    blue: 'bg-gradient-to-br from-blue-500 to-blue-700',
-    green: 'bg-gradient-to-br from-green-500 to-green-700',
-    yellow: 'bg-gradient-to-br from-yellow-400 to-yellow-600',
-    purple: 'bg-gradient-to-br from-purple-500 to-purple-700',
+const TILE_COLORS: Record<TileColor, { from: string; to: string }> = {
+    red: { from: '#ef4444', to: '#b91c1c' },
+    blue: { from: '#3b82f6', to: '#1d4ed8' },
+    green: { from: '#22c55e', to: '#15803d' },
+    yellow: { from: '#facc15', to: '#ca8a04' },
+    purple: { from: '#a855f7', to: '#7e22ce' },
 };
 
 export function Tile({ color, onClick, isSelected, isMatched, isShaking }: TileProps) {
@@ -24,10 +24,12 @@ export function Tile({ color, onClick, isSelected, isMatched, isShaking }: TileP
     return (
         <button
             onClick={onClick}
+            style={{
+                background: `linear-gradient(135deg, ${TILE_COLORS[color].from} 0%, ${TILE_COLORS[color].to} 100%)`,
+            }}
             className={`
         relative h-full w-full rounded-xl
         transition-all duration-300 ease-out
-        ${TILE_COLORS[color]}
         ${isSelected ? 'scale-110 ring-4 ring-white shadow-2xl' : 'scale-100'}
         ${isMatched ? 'explode-animation' : 'opacity-100'}
         ${isShaking ? 'shake-animation' : ''}
