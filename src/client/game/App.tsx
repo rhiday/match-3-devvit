@@ -289,29 +289,50 @@ Can you beat my score? 🎮`.trim();
         </div>
 
         {/* Bottom controls - Help, Volume, and Links */}
-        <div className="mt-6 flex items-center justify-center gap-4 flex-wrap">
-          <button
-            onClick={() => setShowHowToPlay(true)}
-            className="text-3xl text-gray-400 hover:text-white transition-all hover:scale-110 active:scale-95"
-            title="How to play"
-          >
-            ❓
-          </button>
-          <VolumeControl />
-          <span className="text-gray-700">|</span>
-          <button
-            onClick={() => navigateTo('https://github.com/rhiday/match-3-devvit/issues')}
-            className="text-gray-500 hover:text-orange-400 transition-colors cursor-pointer font-medium"
-          >
-            🐛 Report
-          </button>
-          <span className="text-gray-700">|</span>
-          <button
-            onClick={() => navigateTo('https://www.reddit.com/r/SnapMatch')}
-            className="text-gray-500 hover:text-orange-400 transition-colors cursor-pointer font-medium"
-          >
-            💬 Community
-          </button>
+        <div className="mt-6 flex flex-col items-center gap-2">
+          <div className="flex items-center justify-center gap-4 flex-wrap">
+            <button
+              onClick={() => setShowHowToPlay(true)}
+              className="text-3xl text-gray-400 hover:text-white transition-all hover:scale-110 active:scale-95"
+              title="How to play"
+            >
+              ❓
+            </button>
+            <VolumeControl />
+            <span className="text-gray-700">|</span>
+            <button
+              onClick={() => navigateTo('https://github.com/rhiday/match-3-devvit/issues')}
+              className="text-gray-500 hover:text-orange-400 transition-colors cursor-pointer font-medium"
+            >
+              🐛 Report
+            </button>
+            <span className="text-gray-700">|</span>
+            <button
+              onClick={() => navigateTo('https://www.reddit.com/r/SnapMatch')}
+              className="text-gray-500 hover:text-orange-400 transition-colors cursor-pointer font-medium"
+            >
+              💬 Community
+            </button>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="text-xs text-gray-600 font-mono">v0.0.5</div>
+            {/* Debug gradient test */}
+            <div 
+              style={{ background: 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)' }}
+              className="w-4 h-4 rounded"
+              title="Red gradient test - if you see this red, gradients work!"
+            />
+            <div 
+              style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)' }}
+              className="w-4 h-4 rounded"
+              title="Blue gradient test"
+            />
+            <div 
+              style={{ background: 'linear-gradient(135deg, #22c55e 0%, #15803d 100%)' }}
+              className="w-4 h-4 rounded"
+              title="Green gradient test"
+            />
+          </div>
         </div>
 
         {/* Results modal */}
