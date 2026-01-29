@@ -7,6 +7,7 @@ interface GameBoardProps {
     selectedTile: { row: number; col: number } | null;
     matchedTiles: Set<string>;
     shakingTile: { row: number; col: number } | null;
+    score: number;
 }
 
 export function GameBoard({
@@ -15,6 +16,7 @@ export function GameBoard({
     selectedTile,
     matchedTiles,
     shakingTile,
+    score,
 }: GameBoardProps) {
     const isSelected = (row: number, col: number) => {
         return selectedTile?.row === row && selectedTile?.col === col;
@@ -55,6 +57,7 @@ export function GameBoard({
                                 isSelected={isSelected(rowIndex, colIndex)}
                                 isMatched={isMatched(rowIndex, colIndex)}
                                 isShaking={isShaking(rowIndex, colIndex)}
+                                score={score}
                             />
                         </div>
                     ))

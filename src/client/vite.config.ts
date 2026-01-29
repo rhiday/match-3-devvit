@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import tailwind from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
-import { copyFileSync } from 'fs';
+import { copyFileSync, readdirSync, mkdirSync } from 'fs';
 import { resolve } from 'path';
 
 // https://vitejs.dev/config/
@@ -20,7 +20,20 @@ export default defineConfig({
           copyFileSync(resolve(publicDir, 'snapmatch.jpeg'), resolve(outDir, 'snapmatch.jpeg'));
           copyFileSync(resolve(publicDir, 'pop.ogg'), resolve(outDir, 'pop.ogg'));
           copyFileSync(resolve(publicDir, 'Plop.ogg'), resolve(outDir, 'Plop.ogg'));
-          console.log('✓ Copied public assets');
+          
+          // Copy all tile images
+          const tilesDir = resolve(publicDir, 'tiles');
+          const outTilesDir = resolve(outDir, 'tiles');
+          mkdirSync(outTilesDir, { recursive: true });
+          
+          const tileFiles = readdirSync(tilesDir);
+          tileFiles.forEach(file => {
+            if (file.endsWith('.png')) {
+              copyFileSync(resolve(tilesDir, file), resolve(outTilesDir, file));
+            }
+          });
+          
+          console.log('✓ Copied public assets and tile images');
         } catch (err) {
           console.error('Failed to copy public assets:', err);
         }

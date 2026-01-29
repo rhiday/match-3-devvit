@@ -255,6 +255,7 @@ Can you beat my score? 🎮`.trim();
               selectedTile={selectedTile}
               matchedTiles={matchedTiles}
               shakingTile={shakingTile}
+              score={gameState.score}
             />
             
             {/* Start game overlay */}
@@ -315,7 +316,7 @@ Can you beat my score? 🎮`.trim();
             </button>
           </div>
           <div className="flex items-center gap-2">
-            <div className="text-xs text-gray-600 font-mono">v0.2.1 custom-yellow</div>
+            <div className="text-xs text-gray-600 font-mono">v0.3.0 tile-themes</div>
             {/* Debug gradient test */}
             <div 
               style={{ background: 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)' }}
