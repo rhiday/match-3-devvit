@@ -9,11 +9,11 @@ interface TileProps {
 }
 
 const TILE_COLORS: Record<TileColor, string> = {
-    red: 'from-red-500 to-red-700',
-    blue: 'from-blue-500 to-blue-700',
-    green: 'from-green-500 to-green-700',
-    yellow: 'from-yellow-400 to-yellow-600',
-    purple: 'from-purple-500 to-purple-700',
+    red: 'bg-gradient-to-br from-red-500 to-red-700',
+    blue: 'bg-gradient-to-br from-blue-500 to-blue-700',
+    green: 'bg-gradient-to-br from-green-500 to-green-700',
+    yellow: 'bg-gradient-to-br from-yellow-400 to-yellow-600',
+    purple: 'bg-gradient-to-br from-purple-500 to-purple-700',
 };
 
 export function Tile({ color, onClick, isSelected, isMatched, isShaking }: TileProps) {
@@ -25,7 +25,7 @@ export function Tile({ color, onClick, isSelected, isMatched, isShaking }: TileP
         <button
             onClick={onClick}
             className={`
-        relative h-full w-full rounded-xl bg-gradient-to-br
+        relative h-full w-full rounded-xl
         transition-all duration-300 ease-out
         ${TILE_COLORS[color]}
         ${isSelected ? 'scale-110 ring-4 ring-white shadow-2xl' : 'scale-100'}

@@ -34,9 +34,8 @@ export function GameBoard({
             <div
                 className="
           grid gap-2 rounded-3xl
-          bg-gradient-to-br from-gray-900 to-gray-800
+          bg-gray-900
           p-4 shadow-2xl
-          backdrop-blur-sm
         "
                 style={{
                     gridTemplateColumns: 'repeat(5, 1fr)',
