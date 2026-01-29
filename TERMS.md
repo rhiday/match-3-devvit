@@ -82,9 +82,9 @@ These terms are governed by the laws of your jurisdiction. Any disputes will be 
 ## Contact
 
 Questions about these terms? Contact us:
-- **Reddit**: u/YourUsername
+- **Reddit**: u/rhiday
 - **Subreddit**: r/SnapMatch  
-- **GitHub**: [Report Issues](https://github.com/yourusername/snapmatch/issues)
+- **GitHub**: [Report Issues](https://github.com/rhiday/match-3-devvit/issues)
 
 ## Acknowledgment
 

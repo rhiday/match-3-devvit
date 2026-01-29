@@ -57,14 +57,14 @@ export const Splash = () => {
         <span className="text-gray-600">|</span>
         <button
           className="cursor-pointer hover:text-white transition-colors"
-          onClick={() => navigateTo('https://github.com/yourusername/snapmatch/blob/main/PRIVACY.md')}
+          onClick={() => navigateTo('https://github.com/rhiday/match-3-devvit/blob/main/snapmatch/PRIVACY.md')}
         >
           Privacy
         </button>
         <span className="text-gray-600">|</span>
         <button
           className="cursor-pointer hover:text-white transition-colors"
-          onClick={() => navigateTo('https://github.com/yourusername/snapmatch/issues')}
+          onClick={() => navigateTo('https://github.com/rhiday/match-3-devvit/issues')}
         >
           Report Issue
         </button>

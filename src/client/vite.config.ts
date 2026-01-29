@@ -17,7 +17,7 @@ export default defineConfig({
         
         try {
           // Copy public assets
-          copyFileSync(resolve(publicDir, 'snoo.png'), resolve(outDir, 'snoo.png'));
+          copyFileSync(resolve(publicDir, 'snapmatch.jpeg'), resolve(outDir, 'snapmatch.jpeg'));
           copyFileSync(resolve(publicDir, 'pop.ogg'), resolve(outDir, 'pop.ogg'));
           copyFileSync(resolve(publicDir, 'Plop.ogg'), resolve(outDir, 'Plop.ogg'));
           console.log('✓ Copied public assets');

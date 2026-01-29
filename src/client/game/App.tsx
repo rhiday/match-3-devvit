@@ -300,7 +300,7 @@ Can you beat my score? 🎮`.trim();
           <VolumeControl />
           <span className="text-gray-700">|</span>
           <button
-            onClick={() => navigateTo('https://github.com/yourusername/snapmatch/issues')}
+            onClick={() => navigateTo('https://github.com/rhiday/match-3-devvit/issues')}
             className="text-gray-500 hover:text-orange-400 transition-colors cursor-pointer font-medium"
           >
             🐛 Report

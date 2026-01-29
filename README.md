@@ -18,8 +18,8 @@ SnapMatch is a fast-paced match-3 puzzle game where you compete against other Re
 
 ### Need Help or Want to Report an Issue?
 - **Questions?** Post on r/SnapMatch
-- **Found a bug?** [Report it on GitHub](https://github.com/yourusername/snapmatch/issues)
-- **Contact:** u/YourUsername
+- **Found a bug?** [Report it on GitHub](https://github.com/rhiday/match-3-devvit/issues)
+- **Contact:** u/rhiday
 
 ### Legal
 - [Privacy Policy](./PRIVACY.md) - How we handle your data
@@ -118,9 +118,9 @@ Built with [Cursor](https://cursor.com) integration for AI-assisted development.
 
 ## 📞 Contact & Support
 
-- **Reddit**: u/YourUsername
+- **Reddit**: u/rhiday
 - **Community**: r/SnapMatch
-- **Issues**: [GitHub Issues](https://github.com/yourusername/snapmatch/issues)
+- **Issues**: [GitHub Issues](https://github.com/rhiday/match-3-devvit/issues)
 - **Privacy**: See [PRIVACY.md](./PRIVACY.md)
 - **Terms**: See [TERMS.md](./TERMS.md)
 

@@ -57,9 +57,9 @@ We may update this privacy policy from time to time. Changes will be reflected w
 ## Contact Us
 
 If you have questions, concerns, or requests regarding your data:
-- **Reddit**: u/YourUsername
+- **Reddit**: u/rhiday
 - **Subreddit**: r/SnapMatch
-- **GitHub Issues**: [Report on GitHub](https://github.com/yourusername/snapmatch/issues)
+- **GitHub Issues**: [Report on GitHub](https://github.com/rhiday/match-3-devvit/issues)
 
 ---
 
