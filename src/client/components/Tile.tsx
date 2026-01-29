@@ -42,8 +42,8 @@ export function Tile({ color, onClick, isSelected, isMatched, isShaking }: TileP
                 }
             }}
             style={{
-                backgroundColor: solidColors[color],
-                background: `linear-gradient(135deg, ${TILE_COLORS[color].from} 0%, ${TILE_COLORS[color].to} 100%)`,
+                // Use box-shadow instead of background for iOS WebView compatibility
+                boxShadow: `inset 0 0 0 100px ${solidColors[color]}`,
                 cursor: 'pointer',
                 WebkitTapHighlightColor: 'transparent',
             }}
@@ -64,10 +64,10 @@ export function Tile({ color, onClick, isSelected, isMatched, isShaking }: TileP
             {/* Highlight shine */}
             <div className="absolute left-2 top-2 size-3 rounded-full bg-white/30" />
 
-            {/* DEBUG: Show color name */}
-            <div className="absolute inset-0 flex items-center justify-center text-white text-[8px] font-bold pointer-events-none">
+            {/* DEBUG: Remove after confirming colors work */}
+            {/* <div className="absolute inset-0 flex items-center justify-center text-white text-[8px] font-bold pointer-events-none">
                 {color[0].toUpperCase()}
-            </div>
+            </div> */}
 
             {/* Explosion particles */}
             {isMatched && (
