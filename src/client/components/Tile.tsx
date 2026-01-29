@@ -38,11 +38,11 @@ export function Tile({ color, onClick, isSelected, isMatched, isShaking }: TileP
       `}
             aria-label={`${color} tile`}
         >
-            {/* Inner glow effect */}
-            <div className="absolute inset-2 rounded-lg bg-white/20" />
+            {/* Inner glow effect - removed for better mobile visibility */}
+            {/* <div className="absolute inset-2 rounded-lg bg-white/20" /> */}
 
             {/* Highlight shine */}
-            <div className="absolute left-2 top-2 size-4 rounded-full bg-white/40 blur-sm" />
+            <div className="absolute left-2 top-2 size-3 rounded-full bg-white/30" />
 
             {/* Explosion particles */}
             {isMatched && (
