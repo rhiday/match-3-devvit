@@ -2,7 +2,32 @@
 
 **A competitive match-3 puzzle game for Reddit** - powered by Devvit
 
-## 🎮 Game Overview
+---
+
+## 🎮 For Players
+
+### What is SnapMatch?
+
+SnapMatch is a fast-paced match-3 puzzle game where you compete against other Reddit users for the highest daily score. Like Wordle, everyone plays the same puzzle each day - but can you get the top score?
+
+### How to Play
+1. **Tap to Start** - You'll have 60 seconds
+2. **Match tiles** - Click adjacent tiles to swap them and match 3+ of the same color
+3. **Create combos** - Cascading matches multiply your score
+4. **Beat the competition** - Climb the daily leaderboard
+
+### Need Help or Want to Report an Issue?
+- **Questions?** Post on r/SnapMatch
+- **Found a bug?** [Report it on GitHub](https://github.com/yourusername/snapmatch/issues)
+- **Contact:** u/YourUsername
+
+### Legal
+- [Privacy Policy](./PRIVACY.md) - How we handle your data
+- [Terms of Service](./TERMS.md) - Rules and guidelines
+
+---
+
+## 🎮 For Developers
 
 SnapMatch is an asynchronous multiplayer match-3 puzzle game where players compete for the highest score on daily puzzles. Like Wordle, everyone plays the same puzzle each day and competes on a global leaderboard.
 
@@ -91,6 +116,14 @@ src/
 
 Built with [Cursor](https://cursor.com) integration for AI-assisted development.
 
+## 📞 Contact & Support
+
+- **Reddit**: u/YourUsername
+- **Community**: r/SnapMatch
+- **Issues**: [GitHub Issues](https://github.com/yourusername/snapmatch/issues)
+- **Privacy**: See [PRIVACY.md](./PRIVACY.md)
+- **Terms**: See [TERMS.md](./TERMS.md)
+
 ## 📝 License
 
-BSD-3-Clause
+BSD-3-Clause - See [LICENSE](./LICENSE) for details

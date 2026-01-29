@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { navigateTo } from '@devvit/web/client';
 
 import type { GameState, LeaderboardEntry } from '../../shared/types';
 import { initializeGame, makeMove, processCascade, updateTime, startGame } from '../../shared/game/GameState';
@@ -234,7 +235,7 @@ Can you beat my score? 🎮`.trim();
     <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 p-4">
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
-        <div className="mb-6 text-center">
+        <div className="mb-6 text-center relative">
           <div className="flex items-center justify-center gap-4 mb-2">
             <h1 className="text-5xl font-bold text-white">
               SnapMatch
@@ -246,10 +247,26 @@ Can you beat my score? 🎮`.trim();
             >
               ❓
             </button>
+            <VolumeControl />
           </div>
           <p className="text-gray-400">
             Match 3+ tiles to score points. Create chains for multipliers!
           </p>
+          <div className="mt-2 text-sm">
+            <button
+              onClick={() => navigateTo('https://github.com/yourusername/snapmatch/issues')}
+              className="text-gray-500 hover:text-gray-300 transition-colors cursor-pointer"
+            >
+              🐛 Report Issue
+            </button>
+            <span className="text-gray-700 mx-2">|</span>
+            <button
+              onClick={() => navigateTo('https://www.reddit.com/r/SnapMatch')}
+              className="text-gray-500 hover:text-gray-300 transition-colors cursor-pointer"
+            >
+              💬 r/SnapMatch
+            </button>
+          </div>
         </div>
 
         {/* Game area */}
@@ -258,7 +275,6 @@ Can you beat my score? 🎮`.trim();
           <div className="flex flex-col gap-6 lg:order-1">
             <ScoreDisplay score={gameState.score} totalChains={gameState.totalChains} />
             <Timer timeRemaining={gameState.timeRemaining} />
-            <VolumeControl />
           </div>
 
           {/* Center - Game board */}
