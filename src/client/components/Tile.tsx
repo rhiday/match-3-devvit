@@ -18,13 +18,23 @@ const TILE_COLORS: Record<TileColor, { from: string; to: string }> = {
 
 export function Tile({ color, onClick, isSelected, isMatched, isShaking }: TileProps) {
     if (!color) {
-        return <div className="h-full w-full bg-transparent" />;
+        return <div className="h-full w-full bg-gray-700 rounded-xl" />;
     }
+
+    // Solid colors as fallback for mobile
+    const solidColors: Record<TileColor, string> = {
+        red: '#ef4444',
+        blue: '#3b82f6',
+        green: '#22c55e',
+        yellow: '#facc15',
+        purple: '#a855f7',
+    };
 
     return (
         <button
             onClick={onClick}
             style={{
+                backgroundColor: solidColors[color],
                 background: `linear-gradient(135deg, ${TILE_COLORS[color].from} 0%, ${TILE_COLORS[color].to} 100%)`,
             }}
             className={`
